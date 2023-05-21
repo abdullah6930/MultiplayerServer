@@ -1,0 +1,36 @@
+# Visual Studio generated files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.obj/
+*.bin/
+
+# NuGet
+packages/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Resharper
+_ReSharper*/
+
+# Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# User-specific files
+*.userprefs
+
+# Unity generated
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
