@@ -1,8 +1,9 @@
 ﻿using MultiplayerServer.GS;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace MultiplayerServer;
 
+[Serializable]
 class ServerConfig
 {
     public string? CurrentEnvironment { get; set; }
@@ -10,6 +11,7 @@ class ServerConfig
     public EnvironmentConfig? Production { get; set; }
 }
 
+[Serializable]
 class EnvironmentConfig
 {
     public string? IPAddress { get; set; }
@@ -20,16 +22,18 @@ class Program
 {
     static void Main()
     {
-        // Read the server configuration from ServerConfig.json
+        // Construct the path to the ServerConfig.json file
         string configPath = Path.Combine("Assets", "Config", "ServerConfig.json");
+
+        Console.WriteLine("Server configpath : " + configPath);
         string configJson = File.ReadAllText(configPath);
-        var serverConfig = JsonSerializer.Deserialize<ServerConfig>(configJson);
+        var serverConfig = JsonConvert.DeserializeObject<ServerConfig>(configJson);
 
         // Retrieve the appropriate IP address based on the current environment
         var environmentConfig = GetEnvironmentConfig(serverConfig);
 
         // Use the IP address for your server setup
-        GameServer server = new GameServer();
+        GameServer server = new ();
         server.Start(environmentConfig.IPAddress, environmentConfig.Port);
         // Example usage:
         Console.WriteLine("Server started. Using IP address: " + environmentConfig.IPAddress);

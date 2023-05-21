@@ -20,4 +20,12 @@
     <Folder Include="Tests\Unit\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if not exist &quot;$(ProjectDir)\bin\Debug\net7.0\Assets\Config&quot; mkdir &quot;$(ProjectDir)\bin\Debug\net7.0\Assets\Config&quot;&#xD;&#xA;xcopy /y &quot;$(ProjectDir)\Assets\Config\ServerConfig.json&quot;  &quot;$(ProjectDir)\bin\Debug\net7.0\Assets\Config&quot;" />
+  </Target>
+
 </Project>
