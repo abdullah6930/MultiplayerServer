@@ -1,22 +1,8 @@
 ﻿using MultiplayerServer.GS;
+using MultiplayerServer.Utilities;
 using Newtonsoft.Json;
 
 namespace MultiplayerServer;
-
-[Serializable]
-class ServerConfig
-{
-    public string? CurrentEnvironment { get; set; }
-    public EnvironmentConfig? Development { get; set; }
-    public EnvironmentConfig? Production { get; set; }
-}
-
-[Serializable]
-class EnvironmentConfig
-{
-    public string? IPAddress { get; set; }
-    public int Port { get; set; }
-}
 
 class Program
 {
@@ -30,7 +16,7 @@ class Program
         var serverConfig = JsonConvert.DeserializeObject<ServerConfig>(configJson);
 
         // Retrieve the appropriate IP address based on the current environment
-        var environmentConfig = GetEnvironmentConfig(serverConfig);
+        var environmentConfig = ServerConfig.GetSelectedEnvironmentConfig(serverConfig);
 
         // Use the IP address for your server setup
         GameServer server = new ();
@@ -40,19 +26,5 @@ class Program
 
         // Keep the server running until the user presses Enter
         Console.ReadLine();
-    }
-
-    static EnvironmentConfig GetEnvironmentConfig(ServerConfig serverConfig)
-    {
-        // Retrieve the appropriate IP address based on the current environment
-        switch (serverConfig.CurrentEnvironment.ToLower())
-        {
-            case "development":
-                return serverConfig.Development;
-            case "production":
-                return serverConfig.Production;
-            default:
-                throw new ArgumentException("Invalid CurrentEnvironment value in the configuration file.");
-        }
     }
 }

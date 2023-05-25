@@ -4,7 +4,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,15 +12,19 @@
     <Folder Include="Assets\Networking\" />
     <Folder Include="Assets\ClientHandlers\" />
     <Folder Include="Assets\ServerHaandlers\" />
-    <Folder Include="Assets\Utilities\" />
     <Folder Include="Resources\Database\Migrations\" />
     <Folder Include="Resources\Database\SeedData\" />
     <Folder Include="Tests\Integration\" />
     <Folder Include="Tests\Unit\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServerUtilities\ServerUtilities.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
